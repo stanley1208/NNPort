@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NNPort - Join the Waitlist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e14;
+            --bg-secondary: #12181f;
+            --bg-tertiary: #1a2332;
+            --bg-elevated: #243044;
+            --accent-primary: #4a9eff;
+            --accent-secondary: #38bdf8;
+            --accent-gradient: linear-gradient(135deg, #4a9eff 0%, #38bdf8 100%);
+            --accent-glow: rgba(74, 158, 255, 0.3);
+            --success: #10b981;
+            --text-primary: #f0f4f8;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: rgba(148, 163, 184, 0.12);
+            --border-radius: 16px;
+            --border-radius-sm: 10px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-gradient {
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(74, 158, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 100% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 30% at 0% 80%, rgba(74, 158, 255, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(74, 158, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 158, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+            mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* Header */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 48px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+            filter: drop-shadow(0 0 12px var(--accent-glow));
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 8px var(--accent-glow)); }
+            50% { filter: drop-shadow(0 0 20px var(--accent-primary)); }
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(74, 158, 255, 0.1);
+            border: 1px solid rgba(74, 158, 255, 0.3);
+            border-radius: 24px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent-primary);
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 span {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 36px;
+            box-shadow: 
+                0 4px 24px rgba(0, 0, 0, 0.3),
+                0 0 60px rgba(74, 158, 255, 0.05);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .form-card h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .form-card .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 32px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-header:first-of-type {
+            margin-top: 0;
+        }
+
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--bg-primary);
+        }
+
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .form-label .required {
+            color: var(--accent-primary);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-input:hover,
+        .form-select:hover,
+        .form-textarea:hover {
+            border-color: rgba(148, 163, 184, 0.25);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .form-select {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 40px;
+        }
+
+        .form-select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        /* Radio Group */
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .radio-option {
+            flex: 1 1 auto;
+            min-width: 130px;
+        }
+
+        .radio-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .radio-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 14px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .radio-option label:hover {
+            border-color: rgba(148, 163, 184, 0.25);
+            color: var(--text-primary);
+        }
+
+        .radio-option input:checked + label {
+            background: rgba(74, 158, 255, 0.1);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* Checkbox Group */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .checkbox-option {
+            flex: 0 1 auto;
+        }
+
+        .checkbox-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .checkbox-option label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-option label:hover {
+            border-color: rgba(148, 163, 184, 0.25);
+            color: var(--text-primary);
+        }
+
+        .checkbox-option input:checked + label {
+            background: rgba(74, 158, 255, 0.1);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .checkbox-option label::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-option input:checked + label::before {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230a0e14' stroke-width='3'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Other input inline */
+        .other-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .other-input-wrapper .form-input {
+            flex: 1;
+        }
+
+        .other-input-wrapper label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            padding: 16px 28px;
+            background: var(--accent-gradient);
+            border: none;
+            border-radius: var(--border-radius-sm);
+            color: var(--bg-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 
+                0 4px 16px rgba(74, 158, 255, 0.3),
+                0 0 24px rgba(74, 158, 255, 0.15);
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 6px 24px rgba(74, 158, 255, 0.4),
+                0 0 40px rgba(74, 158, 255, 0.2);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Progress indicator */
+        .progress-bar {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+        }
+
+        .progress-segment {
+            flex: 1;
+            height: 4px;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        .progress-segment.active {
+            background: var(--accent-gradient);
+        }
+
+        /* Success State */
+        .success-state {
+            display: none;
+            text-align: center;
+            padding: 48px 20px;
+        }
+
+        .success-state.show {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .success-icon {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 28px;
+            background: rgba(16, 185, 129, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--success);
+        }
+
+        .success-state h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .success-state p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .footer p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 32px 16px 60px;
+            }
+
+            .form-card {
+                padding: 24px 18px;
+            }
+
+            .radio-option, .checkbox-option {
+                min-width: 100%;
+            }
+
+            .radio-group, .checkbox-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="grid-overlay"></div>
+
+    <div class="container">
+        <div class="logo-section">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⬡</span>
+                NNPort
+            </a>
+        </div>
+
+        <div class="hero">
+            <div class="badge">🚀 Early Access</div>
+            <h1>Port Neural Networks to <span>Any Hardware</span></h1>
+            <p>Help us understand your use case so we can build the right tool for you. Join the waitlist for early access.</p>
+        </div>
+
+        <div class="form-card">
+            <form id="waitlist-form">
+                <h2>Join the Waitlist</h2>
+                <p class="subtitle">Takes about 3 minutes to complete</p>
+
+                <div class="progress-bar">
+                    <div class="progress-segment active"></div>
+                    <div class="progress-segment"></div>
+                    <div class="progress-segment"></div>
+                    <div class="progress-segment"></div>
+                </div>
+
+                <!-- Section 1: About You -->
+                <div class="section-header">
+                    <span class="section-number">1</span>
+                    <span class="section-title">About You</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email <span class="required">*</span></label>
+                    <input type="email" id="email" class="form-input" placeholder="you@company.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" id="name" class="form-input" placeholder="Your name">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Organization / Team</label>
+                    <input type="text" id="organization" class="form-input" placeholder="Company or team name">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What best describes you?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="role-ml" name="role" value="ml-engineer">
+                            <label for="role-ml">ML Engineer</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="role-gpu" name="role" value="gpu-engineer">
+                            <label for="role-gpu">GPU/Compute Engineer</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="role-embedded" name="role" value="embedded-engineer">
+                            <label for="role-embedded">Embedded/Edge Engineer</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="role-researcher" name="role" value="researcher">
+                            <label for="role-researcher">Researcher</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="role-student" name="role" value="student">
+                            <label for="role-student">Student/Hobbyist</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="role-other" name="role" value="other">
+                            <label for="role-other">Other</label>
+                        </div>
+                    </div>
+                    <div class="other-input-wrapper" id="role-other-wrapper" style="display: none;">
+                        <label>Specify:</label>
+                        <input type="text" id="role-other-text" class="form-input" placeholder="Your role">
+                    </div>
+                </div>
+
+                <!-- Section 2: Your Goal -->
+                <div class="section-header">
+                    <span class="section-number">2</span>
+                    <span class="section-title">Your Goal</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What are you trying to do with NNPort?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="goal-port" name="goal" value="port">
+                            <label for="goal-port">Port existing code to edge device</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="goal-optimize" name="goal" value="optimize">
+                            <label for="goal-optimize">Optimize (speed/power/memory)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="goal-backend" name="goal" value="backend">
+                            <label for="goal-backend">Add backend features (FP16/INT8/ops)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="goal-exploring" name="goal" value="exploring">
+                            <label for="goal-exploring">Not sure yet / exploring</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What are you starting from?</label>
+                    <select id="starting-from" class="form-select">
+                        <option value="">Select framework/source...</option>
+                        <option value="pytorch">PyTorch</option>
+                        <option value="tensorflow">TensorFlow</option>
+                        <option value="cuda">CUDA Kernels</option>
+                        <option value="opencl">OpenCL Kernels</option>
+                        <option value="vulkan">Vulkan Compute</option>
+                        <option value="metal">Metal Compute</option>
+                        <option value="hip-sycl">HIP/SYCL</option>
+                        <option value="cpp">C/C++ CPU Code</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Section 3: Target Hardware -->
+                <div class="section-header">
+                    <span class="section-number">3</span>
+                    <span class="section-title">Target Hardware</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Which edge device(s) are you targeting?</label>
+                    <textarea id="target-devices" class="form-textarea" placeholder="e.g., Raspberry Pi 5, Jetson Orin Nano, Snapdragon 8 Gen 3, Qualcomm QCS6490...&#10;Include model/SoC/GPU/CPU/RAM if you can"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Edge device class</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="class-pc" name="device-class" value="industrial-pc">
+                            <label for="class-pc">Industrial PC / Mini PC</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="class-sbc" name="device-class" value="sbc">
+                            <label for="class-sbc">SBC (Raspberry Pi-class)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="class-embedded" name="device-class" value="embedded-module">
+                            <label for="class-embedded">Embedded Module (Jetson-class)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="class-mobile" name="device-class" value="mobile">
+                            <label for="class-mobile">Mobile/Handheld</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="class-other" name="device-class" value="other">
+                            <label for="class-other">Other</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">OS on the device</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="os-linux" name="os" value="linux">
+                            <label for="os-linux">Linux</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="os-android" name="os" value="android">
+                            <label for="os-android">Android</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="os-windows" name="os" value="windows">
+                            <label for="os-windows">Windows</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="os-rtos" name="os" value="rtos">
+                            <label for="os-rtos">RTOS</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="os-other" name="os" value="other">
+                            <label for="os-other">Other</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Accelerator available on-device (select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="accel-gpu" name="accelerator" value="gpu">
+                            <label for="accel-gpu">GPU</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="accel-npu" name="accelerator" value="npu">
+                            <label for="accel-npu">NPU</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="accel-dsp" name="accelerator" value="dsp">
+                            <label for="accel-dsp">DSP</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="accel-cpu" name="accelerator" value="cpu-only">
+                            <label for="accel-cpu">CPU-only</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="accel-unsure" name="accelerator" value="not-sure">
+                            <label for="accel-unsure">Not sure</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Which compute API(s) can you use on the device today? (select all)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="api-opencl" name="compute-api" value="opencl">
+                            <label for="api-opencl">OpenCL</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="api-cuda" name="compute-api" value="cuda">
+                            <label for="api-cuda">CUDA</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="api-vulkan" name="compute-api" value="vulkan">
+                            <label for="api-vulkan">Vulkan (compute)</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="api-metal" name="compute-api" value="metal">
+                            <label for="api-metal">Metal</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="api-other" name="compute-api" value="other">
+                            <label for="api-other">Other</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="api-unsure" name="compute-api" value="not-sure">
+                            <label for="api-unsure">Not sure</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Model Details -->
+                <div class="section-header">
+                    <span class="section-number">4</span>
+                    <span class="section-title">Model Details</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What input modality are you using? (select all)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="input-image" name="input-modality" value="image">
+                            <label for="input-image">Image (single frame)</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="input-video" name="input-modality" value="video">
+                            <label for="input-video">Video / Camera stream</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="input-audio" name="input-modality" value="audio">
+                            <label for="input-audio">Audio / Voice</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="input-text" name="input-modality" value="text">
+                            <label for="input-text">Text</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="input-sensors" name="input-modality" value="sensors">
+                            <label for="input-sensors">Sensors / Time-series</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="input-tabular" name="input-modality" value="tabular">
+                            <label for="input-tabular">Tabular</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="input-other" name="input-modality" value="other">
+                            <label for="input-other">Other</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">What output modality do you need? (select all)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="output-embeddings" name="output-modality" value="embeddings">
+                            <label for="output-embeddings">Embeddings / Feature vectors</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="output-text" name="output-modality" value="generated-text">
+                            <label for="output-text">Generated text</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="output-audio" name="output-modality" value="generated-audio">
+                            <label for="output-audio">Generated audio</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="output-control" name="output-modality" value="control-signals">
+                            <label for="output-control">Control signals (robotics)</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="output-other" name="output-modality" value="other">
+                            <label for="output-other">Other</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Precision / datatype needs (select all)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="prec-fp32" name="precision" value="fp32">
+                            <label for="prec-fp32">FP32</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="prec-fp16" name="precision" value="fp16">
+                            <label for="prec-fp16">FP16</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="prec-bf16" name="precision" value="bf16">
+                            <label for="prec-bf16">BF16</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="prec-int8" name="precision" value="int8">
+                            <label for="prec-int8">INT8</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="prec-int4" name="precision" value="int4">
+                            <label for="prec-int4">INT4</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="prec-unsure" name="precision" value="not-sure">
+                            <label for="prec-unsure">Not sure</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Top 3 kernels/ops you care about most</label>
+                    <textarea id="top-kernels" class="form-textarea" placeholder="e.g., Conv2D, MatMul, Attention, Depthwise Conv, Softmax..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submit-btn">
+                    Join Waitlist
+                </button>
+            </form>
+
+            <div class="success-state" id="success-state">
+                <div class="success-icon">
+                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h3>You're on the list! 🎉</h3>
+                <p>Thanks for taking the time to share your use case. We'll reach out as soon as early access is available.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Have questions? <a href="mailto:hello@nnport.dev">Contact us</a></p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('waitlist-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const successState = document.getElementById('success-state');
+        const progressSegments = document.querySelectorAll('.progress-segment');
+
+        // Show/hide "Other" text input for role
+        document.querySelectorAll('input[name="role"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const wrapper = document.getElementById('role-other-wrapper');
+                wrapper.style.display = e.target.value === 'other' ? 'flex' : 'none';
+            });
+        });
+
+        // Update progress bar based on form completion
+        function updateProgress() {
+            const sections = [
+                // Section 1: About You
+                document.getElementById('email').value.length > 0,
+                // Section 2: Your Goal  
+                document.querySelector('input[name="goal"]:checked') !== null,
+                // Section 3: Target Hardware
+                document.getElementById('target-devices').value.length > 0 || 
+                document.querySelector('input[name="device-class"]:checked') !== null,
+                // Section 4: Model Details
+                document.querySelectorAll('input[name="input-modality"]:checked').length > 0
+            ];
+
+            sections.forEach((completed, index) => {
+                if (completed) {
+                    progressSegments[index].classList.add('active');
+                } else {
+                    progressSegments[index].classList.remove('active');
+                }
+            });
+        }
+
+        // Add listeners to update progress
+        form.addEventListener('input', updateProgress);
+        form.addEventListener('change', updateProgress);
+
+        // Collect all checked values for a checkbox group
+        function getCheckedValues(name) {
+            return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
+                .map(cb => cb.value);
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            // Collect form data
+            const formData = {
+                // Section 1
+                email: document.getElementById('email').value,
+                name: document.getElementById('name').value,
+                organization: document.getElementById('organization').value,
+                role: document.querySelector('input[name="role"]:checked')?.value || '',
+                roleOther: document.getElementById('role-other-text').value,
+                
+                // Section 2
+                goal: document.querySelector('input[name="goal"]:checked')?.value || '',
+                startingFrom: document.getElementById('starting-from').value,
+                
+                // Section 3
+                targetDevices: document.getElementById('target-devices').value,
+                deviceClass: document.querySelector('input[name="device-class"]:checked')?.value || '',
+                os: document.querySelector('input[name="os"]:checked')?.value || '',
+                accelerators: getCheckedValues('accelerator'),
+                computeApis: getCheckedValues('compute-api'),
+                
+                // Section 4
+                inputModalities: getCheckedValues('input-modality'),
+                outputModalities: getCheckedValues('output-modality'),
+                precisions: getCheckedValues('precision'),
+                topKernels: document.getElementById('top-kernels').value,
+                
+                timestamp: new Date().toISOString()
+            };
+
+            console.log('Waitlist signup:', formData);
+
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 1200));
+
+            // Show success state
+            form.style.display = 'none';
+            successState.classList.add('show');
+
+            // Store in localStorage as backup
+            const waitlist = JSON.parse(localStorage.getItem('nnport_waitlist') || '[]');
+            waitlist.push(formData);
+            localStorage.setItem('nnport_waitlist', JSON.stringify(waitlist));
+        });
+    </script>
+</body>
+</html>
